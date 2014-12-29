@@ -83,3 +83,17 @@ func BenchmarkGetRanks(b *testing.B) {
 		getRanks(text, t)
 	}
 }
+
+func BenchmarkSummarize(b *testing.B) {
+	text := `The print was designed by Utamaro and published by Tsutaya Jūzaburō in the fourth or fifth year of the Kansei era of the traditional Japanese era divisions[14] (c. 1792–93).[24] Tsutaya's publisher's seal is printed on the left above Hisa's head, and a round censor's seal appears above it. Utamaro's signature is printed in the bottom left.[22]
+
+Fumito Kondō considered the print revolutionary; such expressive, individualized faces are not seen in the stereotyped figures in the works of Utamaro's predecessors such as Harunobu and Kiyonaga,[19] and it was the first time in ukiyo-e history that the beauties were drawn from the general urban population rather than the pleasure quarters.[25]
+
+Records indicate Kita was rated highly in teahouse rankings, and that curious fans flooded her father's teahouse; it is said this caused her to become arrogant and cease to serve tea unless called for. Hisa appears to have been less popular and ranked lower, though still quite popular—a wealthy merchant offered 1500 ryō for her, but her parents refused and she continued to work at the teahouse.[26] Utamaro took advantage of this rivalry in his art, going as far as to portray the two tearoom beauties in tug-of-war and other competitions, with deities associated with their neighbourhoods supporting them: Buddhist guardian deity Acala was associated with Yagenbori, and supported Hisa; Guanyin, the Goddess of Mercy, was associated with the temple Sensō-ji in Asakusa, and supported Kita.[27]
+
+The triangular positioning of three figures became something of a vogue in prints of the mid-1790s. The "Three Beauties of the Kansei Era" normally refer to the three who appear in this print; on occasion, Utamaro replaced Toyohina with Kikumoto O-Han.[14] Utamaro placed the three beauties in the same composition three or four years later in a print called Three Beauties.[g] Hisa holds a teacup saucer in her left hand rather than a handkerchief, and Kita holds her fan in both hands. To Eiji Yoshida, the figures in this print lack the personalities that were the charm of the earlier. Yoshida thought less of the further undifferentiated personalities of a later print, Three Beauties Holding Bags of Snacks,[h] published by Yamaguchiya. The three again pose in the same composition, but holding bags of snacks.[11] As testimony to their popularity, the three models often appeared in the works of other artists,[22] and Utamaro continued to use them in other prints, individually or in pairs.[14]`
+	t := NewDefaultTokenizer()
+	for i := 0; i < b.N; i++ {
+		Summarize(text, t)
+	}
+}
