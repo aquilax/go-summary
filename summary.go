@@ -1,9 +1,7 @@
 package summary
 
 import (
-	"regexp"
 	"sort"
-	"strings"
 )
 
 const minSentences = 2
@@ -14,7 +12,7 @@ type Tokenizer interface {
 	GetParagraphs(text string) []string
 	GetSentences(paragraph string) []string
 	GetWords(sentence string) []string
-	FormatSentece(sentence string) string
+	FormatSentence(sentence string) string
 }
 
 func sentencesIntersection(s1, s2 []string) int {
@@ -23,18 +21,14 @@ func sentencesIntersection(s1, s2 []string) int {
 		return result
 	}
 	sort.StringSlice(s2).Sort()
+	lenS2 := len(s2)
 	for _, w := range s1 {
 		i := sort.SearchStrings(s2, w)
-		if s2[i] == w {
+		if i < lenS2 && s2[i] == w {
 			result++
 		}
 	}
 	return result
-}
-
-func formatSentence(s string) string {
-	re := regexp.MustCompile(`\W`)
-	return re.ReplaceAllString(strings.ToLower(s), "")
 }
 
 func sum(a []int) int {
@@ -57,7 +51,7 @@ func getRanks(text string, t Tokenizer) rankMap {
 	}
 	ranks := make(rankMap)
 	for i, sentence := range sentences {
-		ranks[formatSentence(sentence)] = sum(matrix[i])
+		ranks[t.FormatSentence(sentence)] = sum(matrix[i])
 	}
 	return ranks
 }
@@ -70,7 +64,7 @@ func getBestSentence(text string, ranks rankMap, t Tokenizer) string {
 	}
 	maxRank := 0
 	for _, s := range sentences {
-		stripped := formatSentence(s)
+		stripped := t.FormatSentence(s)
 		rank, ok := ranks[stripped]
 		if ok && rank > maxRank {
 			maxRank = rank
