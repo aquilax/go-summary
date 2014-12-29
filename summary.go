@@ -44,16 +44,13 @@ func sum(a []int) int {
 func getRanks(text string, t Tokenizer) rankMap {
 	sentences := t.GetSentences(text)
 	n := len(sentences)
-	var matrix = make([][]int, n)
-	for i := 0; i < n; i++ {
-		matrix[i] = make([]int, n)
-		for j := 0; j < n; j++ {
-			matrix[i][j] = sentencesIntersection(t.GetWords(sentences[i]), t.GetWords(sentences[j]))
-		}
-	}
 	ranks := make(rankMap)
-	for i, sentence := range sentences {
-		ranks[t.FormatSentence(sentence)] = sum(matrix[i])
+	for i := 0; i < n; i++ {
+		rank := 0
+		for j := 0; j < n; j++ {
+			rank += sentencesIntersection(t.GetWords(sentences[i]), t.GetWords(sentences[j]))
+		}
+		ranks[t.FormatSentence(sentences[i])] = rank
 	}
 	return ranks
 }
