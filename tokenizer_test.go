@@ -27,5 +27,17 @@ func TestTokenizer(t *testing.T) {
 				So(dt.FormatSentence(tc.given), ShouldEqual, tc.expected)
 			}
 		})
+		Convey("Getting sentences works", func() {
+			text := "I like turtles. Do you? Awesome! Hahaha. Lol!!! What's going on????";
+			expected := []string{
+				"I like turtles.",
+				"Do you?",
+				"Awesome!",
+				"Hahaha.",
+				"Lol!",
+				"What's going on?",
+			}
+			So(dt.GetSentences(text), ShouldResemble, expected)
+		})
 	})
 }

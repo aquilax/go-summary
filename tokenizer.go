@@ -16,13 +16,7 @@ func (t DefaultTokenizer) GetParagraphs(text string) []string {
 }
 
 func (t DefaultTokenizer) GetSentences(paragraph string) []string {
-	return strings.FieldsFunc(paragraph, func(r rune) bool {
-		switch r {
-		case '.', '?', ';', '!':
-			return true
-		}
-		return false
-	})
+	return regexp.MustCompile(`(?s)\pL.*?[\.\?!]`).FindAllString(paragraph, -1)
 }
 
 func (t DefaultTokenizer) GetWords(sentence string) []string {
