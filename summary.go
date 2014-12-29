@@ -3,6 +3,7 @@ package summary
 import (
 	"regexp"
 	"sort"
+	"strings"
 )
 
 const minSentences = 2
@@ -22,10 +23,9 @@ func sentencesIntersection(s1, s2 []string) int {
 		return result
 	}
 	sort.StringSlice(s2).Sort()
-	s2Len := len(s2)
 	for _, w := range s1 {
 		i := sort.SearchStrings(s2, w)
-		if i < s2Len {
+		if s2[i] == w {
 			result++
 		}
 	}
@@ -34,7 +34,7 @@ func sentencesIntersection(s1, s2 []string) int {
 
 func formatSentence(s string) string {
 	re := regexp.MustCompile(`\W`)
-	return re.ReplaceAllString(s, "")
+	return re.ReplaceAllString(strings.ToLower(s), "")
 }
 
 func sum(a []int) int {
@@ -63,8 +63,8 @@ func getRanks(text string, t Tokenizer) rankMap {
 }
 
 func getBestSentence(text string, ranks rankMap, t Tokenizer) string {
-	sentences := t.GetSentences(text)
 	bestSentence := ""
+	sentences := t.GetSentences(text)
 	if len(sentences) < minSentences {
 		return bestSentence
 	}
