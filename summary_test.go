@@ -75,3 +75,11 @@ func TestSummary(t *testing.T) {
 		})
 	})
 }
+
+func BenchmarkGetRanks(b *testing.B) {
+	text := `Three Beauties of the Present Day is a nishiki-e colour woodblock print of c. 1792–93 by Japanese ukiyo-e artist Kitagawa Utamaro (c. 1753–1806). The triangular composition depicts the busts of three celebrity beauties of the time: geisha Tomimoto Toyohina (middle), and teahouse waitresses Takashima Hisa (left) and Naniwa Kita (right), each adorned with an identifying family crest. Subtle differences can be detected in the faces of the subjects—a level of individualized realism at the time unusual in ukiyo-e, and a contrast with the stereotyped beauties in earlier masters such as Harunobu and Kiyonaga. The triangular positioning became a vogue in the 1790s. Utamaro produced several other pictures with this arrangement of the same three beauties, and each appeared in numerous other portraits by Utamaro and other artists. Utamaro was the leading ukiyo-e artist in the 1790s in the bijin-ga genre of pictures of female beauties, and was known in particular for his ōkubi-e, which focus on the heads. The luxurious print was published by Tsutaya Jūzaburō and made with multiple woodblocks—one for each colour—and the background was dusted with muscovite to produce a glimmering effect. `
+	t := NewDefaultTokenizer()
+	for i := 0; i < b.N; i++ {
+		getRanks(text, t)
+	}
+}
