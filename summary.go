@@ -1,3 +1,4 @@
+// This packages generates naive text summay
 package summary
 
 import (
@@ -8,6 +9,7 @@ const minSentences = 2
 
 type rankMap map[string]int
 
+// Tokenizer defines the interface for the tokenizing functions
 type Tokenizer interface {
 	GetParagraphs(text string) []string
 	GetSentences(paragraph string) []string
@@ -85,6 +87,7 @@ func getSummary(text string, ranks rankMap, t Tokenizer) string {
 	return result
 }
 
+// Summarize generates summary for the text using the provided tokenizer
 func Summarize(text string, t Tokenizer) string {
 	ranks := getRanks(text, t)
 	return getSummary(text, ranks, t)

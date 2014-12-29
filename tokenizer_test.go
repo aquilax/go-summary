@@ -28,7 +28,7 @@ func TestTokenizer(t *testing.T) {
 			}
 		})
 		Convey("Getting sentences works", func() {
-			text := "I like turtles. Do you? Awesome! Hahaha. Lol!!! What's going on????";
+			text := "I like turtles. Do you? Awesome! Hahaha. Lol!!! What's going on????"
 			expected := []string{
 				"I like turtles.",
 				"Do you?",

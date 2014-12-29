@@ -1,13 +1,8 @@
-## go-summary [![Build Status](https://travis-ci.org/aquilax/go-summary.svg)](https://travis-ci.org/aquilax/go-summary) [![GoDoc](https://godoc.org/github.com/aquilax/go-summary?status.svg)](https://godoc.org/github.com/aquilax/go-summary)
-
-Naive text summarization for Go based on [this](https://gist.github.com/shlomibabluki/5473521) Python implementation.
-
-Example:
-```go
 package summary_test
 
 import (
 	"fmt"
+
 	"github.com/aquilax/go-summary"
 )
 
@@ -23,4 +18,3 @@ func Example() {
 	// След дивия си бяг, подпомогнат от тъмнината и настъпващата буря, той се измъква от турците и се скрива в една воденица на Манастирската река.
 	// В манастира беглецът е добре приет от дякон Викентий, който се отнася гостоприемно с бунтовниците.
 }
-```
